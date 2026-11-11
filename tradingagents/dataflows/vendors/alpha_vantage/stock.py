@@ -37,6 +37,6 @@ def get_stock(
         "datatype": "csv",
     }
 
-    response = _make_api_request("TIME_SERIES_DAILY_ADJUSTED", params)
+    response = _make_api_request("TIME_SERIES_DAILY", params)  # free tier: ADJUSTED is premium
 
     return _filter_csv_by_date_range(response, start_date, end_date)
