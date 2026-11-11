@@ -120,6 +120,10 @@ def build_llm_kwargs(config: dict) -> dict[str, Any]:
 
     # SDK retry budget is cross-provider. Forward it only when explicitly set
     # so each provider keeps its own default (usually 2) otherwise (#1091).
+    timeout = config.get("llm_timeout")
+    if timeout is not None and timeout != "":
+        kwargs["timeout"] = float(timeout)
+
     max_retries = config.get("llm_max_retries")
     if max_retries is not None and max_retries != "":
         kwargs["max_retries"] = _coerce_max_retries(max_retries)
